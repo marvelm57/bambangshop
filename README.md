@@ -58,18 +58,18 @@ You can install Postman via this website: https://www.postman.com/downloads/
     -   [x] Commit: `Implement delete function in Subscriber repository.`
     -   [x] Write answers of your learning module's "Reflection Publisher-1" questions in this README.
 -   **STAGE 2: Implement services and controllers**
-    -   [ ] Commit: `Create Notification service struct skeleton.`
-    -   [ ] Commit: `Implement subscribe function in Notification service.`
-    -   [ ] Commit: `Implement subscribe function in Notification controller.`
-    -   [ ] Commit: `Implement unsubscribe function in Notification service.`
-    -   [ ] Commit: `Implement unsubscribe function in Notification controller.`
-    -   [ ] Write answers of your learning module's "Reflection Publisher-2" questions in this README.
+    -   [x] Commit: `Create Notification service struct skeleton.`
+    -   [x] Commit: `Implement subscribe function in Notification service.`
+    -   [x] Commit: `Implement subscribe function in Notification controller.`
+    -   [x] Commit: `Implement unsubscribe function in Notification service.`
+    -   [x] Commit: `Implement unsubscribe function in Notification controller.`
+    -   [x] Write answers of your learning module's "Reflection Publisher-2" questions in this README.
 -   **STAGE 3: Implement notification mechanism**
-    -   [ ] Commit: `Implement update method in Subscriber model to send notification HTTP requests.`
-    -   [ ] Commit: `Implement notify function in Notification service to notify each Subscriber.`
-    -   [ ] Commit: `Implement publish function in Program service and Program controller.`
-    -   [ ] Commit: `Edit Product service methods to call notify after create/delete.`
-    -   [ ] Write answers of your learning module's "Reflection Publisher-3" questions in this README.
+    -   [x] Commit: `Implement update method in Subscriber model to send notification HTTP requests.`
+    -   [x] Commit: `Implement notify function in Notification service to notify each Subscriber.`
+    -   [x] Commit: `Implement publish function in Program service and Program controller.`
+    -   [x] Commit: `Edit Product service methods to call notify after create/delete.`
+    -   [x] Write answers of your learning module's "Reflection Publisher-3" questions in this README.
 
 ## Your Reflections
 This is the place for you to write reflections:
@@ -97,3 +97,11 @@ This is the place for you to write reflections:
 > **Postman** memungkinkan kita untuk **mengirim _request_ ke API** dan **mendapat _response_** sehingga **memudahkan** kita **untuk menguji API _endpoint_** dan memastikan bahwa API tersebut berfungsi sebagaimana mestinya. Selain itu, **Postman** juga memiliki **fitur** yang memungkinkan untuk **berbagi _collection_** dan **_environment_** sehingga dapat **memfasilitasi** kita untuk **berkolaborasi** dengan orang lain atau **member grup**.
 
 #### Reflection Publisher-3
+1. Observer Pattern has two variations: Push model (publisher pushes data to subscribers) and Pull model (subscribers pull data from publisher). In this tutorial case, which variation of Observer Pattern that we use?
+> Pada BambangShop, kita menggunakan variasi **Push model** yang terlihat pada method `notify()` dalam `src/service/notification.rs`. Pada method tersebut, **Publisher** akan iterasi ke **list subscriber** dan secara aktif **memanggil** method **update**.
+
+2. What are the advantages and disadvantages of using the other variation of Observer Pattern for this tutorial case? (example: if you answer Q1 with Push, then imagine if we used Pull)
+> Jika menggunakan **Pull Method**, **Subcriber** hanya akan _request_ **update** ketika dibutuhkan sehingga **penggunaan resource** dapat **lebih efisien**. Namun, kekurangannya adalah **Subscriber** mungkin **tidak** akan **mendapat update secara langsung**.
+
+3. Explain what will happen to the program if we decide to not use multi-threading in the notification process.
+> Jika tidak menggunakan **multi-threading**, maka dapat menyebabkan **menurunnya _performance_** karena terjadi **delay** di mana pengiriman notifikasi dilakukan secara berurutan, satu per satu.
