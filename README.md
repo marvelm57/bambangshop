@@ -48,15 +48,15 @@ You can install Postman via this website: https://www.postman.com/downloads/
     (You might want to use `cargo check` if you only need to verify your work without running the app.)
 
 ## Mandatory Checklists (Publisher)
--   [ ] Clone https://gitlab.com/ichlaffterlalu/bambangshop to a new repository.
+-   [x] Clone https://gitlab.com/ichlaffterlalu/bambangshop to a new repository.
 -   **STAGE 1: Implement models and repositories**
-    -   [ ] Commit: `Create Subscriber model struct.`
-    -   [ ] Commit: `Create Notification model struct.`
-    -   [ ] Commit: `Create Subscriber database and Subscriber repository struct skeleton.`
-    -   [ ] Commit: `Implement add function in Subscriber repository.`
-    -   [ ] Commit: `Implement list_all function in Subscriber repository.`
-    -   [ ] Commit: `Implement delete function in Subscriber repository.`
-    -   [ ] Write answers of your learning module's "Reflection Publisher-1" questions in this README.
+    -   [x] Commit: `Create Subscriber model struct.`
+    -   [x] Commit: `Create Notification model struct.`
+    -   [x] Commit: `Create Subscriber database and Subscriber repository struct skeleton.`
+    -   [x] Commit: `Implement add function in Subscriber repository.`
+    -   [x] Commit: `Implement list_all function in Subscriber repository.`
+    -   [x] Commit: `Implement delete function in Subscriber repository.`
+    -   [x] Write answers of your learning module's "Reflection Publisher-1" questions in this README.
 -   **STAGE 2: Implement services and controllers**
     -   [ ] Commit: `Create Notification service struct skeleton.`
     -   [ ] Commit: `Implement subscribe function in Notification service.`
@@ -77,6 +77,14 @@ This is the place for you to write reflections:
 ### Mandatory (Publisher) Reflections
 
 #### Reflection Publisher-1
+1. In the Observer pattern diagram explained by the Head First Design Pattern book, Subscriber is defined as an interface. Explain based on your understanding of Observer design patterns, do we still need an interface (or trait in Rust) in this BambangShop case, or a single Model struct is enough?
+> Dalam _Observer design patterns_, **Subscriber**(atau Observer) biasanya digunakan untuk mewakili objek yang ingin **_observe_/_track_** perubahan yang terjadi pada **Publisher**(atau Subject). Pada kasus BambangShop, menggunakan _interface_ **Subscriber** dapat memberikan **fleksibilitas** karena memungkinkan untuk memiliki berbagai jenis **_observer_** yang mungkin memiliki **perilaku yang berbeda** saat menerima **pembaruan dari _subject_**. Oleh karena itu, menggunakan _interface_(atau **trait**) **Subscriber** dapat bermanfaat dalam mengimplementasikan _Observer design pattern_ dalam BambangShop.
+
+2. id in Program and url in Subscriber is intended to be unique. Explain based on your understanding, is using Vec (list) sufficient or using DashMap (map/dictionary) like we currently use is necessary for this case?
+> Jika kita memerlukan **akses yang cepat** ke URL berdasarkan ID yang unik, maka menggunakan **DashMap** **lebih efisien** dan menguntungkan untuk _dataset_ yang besar. Hal ini dikarenakan **DashMap** memiliki **kompleksitas waktu yang lebih baik**, yaitu `O(1)` atau konstan. Sedangkan, penggunaan **Vec** memiliki kompleksitas waktu `O(N)` atau _linear_ sehingga **tidak menguntungkan** untuk **dataset yang besar**, meskipun mungkin sudah cukup jika kita hanya perlu menyimpan daftar _observer_ atau URL yang unik.
+
+3. When programming using Rust, we are enforced by rigorous compiler constraints to make a thread-safe program. In the case of the List of Subscribers (SUBSCRIBERS) static variable, we used the DashMap external library for thread safe HashMap. Explain based on your understanding of design patterns, do we still need DashMap or we can implement Singleton pattern instead?
+> Dalam kasus static variabel SUBSCRIBERS, menggunakan **DashMap** untuk **_thread-safe_** merupakan pendekatan yang **lebih baik** dibandingkan mengimplementasi _Singleton pattern_, terutama jika beberapa _thread_ dapat **mengakses** atau **memodifikasi _subscriber_** secara **konkuren**. Hal ini dikarenakan penerapan **_Singleton pattern_** hanya memastikan **satu _instance_** dari **SUBSCRIBERS** sehingga tidak dapat memastikan **akses _subscriber_** secara **konkuren**. Oleh karena itu, penggunaan **DashMap** diperlukan karena terjamin dapat meng-_handle_ **concurrency** dibandingkan _Singleton pattern_.
 
 #### Reflection Publisher-2
 
